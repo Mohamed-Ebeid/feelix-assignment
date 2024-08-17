@@ -18,6 +18,7 @@ function App() {
 
 	async function fetchData() {
 		setUserData(UserData)
+		setLoading(false)
 		// try {
 		// 	const response = await axios.get(`${apiUrl}/data/`, {});
 		// 	//console.log(response.data)
@@ -43,6 +44,7 @@ function App() {
 		// 	setLabel('')
 		// }
 		setUserData(UserData2)
+		setLoading(false)
 	}
 
 	const handlePieChartClick = (data) => {
