@@ -4,7 +4,7 @@ import axios from 'axios'
 import BarChart from './components/BarChart';
 import PieChart from './components/PieChart';
 import PieChart2 from './components/PieChart2';
-import { UserData2, apiUrl } from './Data';
+import { UserData,UserData2, apiUrl } from './Data';
 
 function App() {
 	const [loading, setLoading] = useState(true)
@@ -17,30 +17,32 @@ function App() {
 	},[])
 
 	async function fetchData() {
-		try {
-			const response = await axios.get(`${apiUrl}/data/`);
-			//console.log(response.data)
-			setUserData(response.data);
-			setLoading(false)
-			setLabel('')
-		} catch (error) {
-			console.error('Error fetching data:', error);
-		}
+		setUserData(UserData)
+		// try {
+		// 	const response = await axios.get(`${apiUrl}/data/`, {});
+		// 	//console.log(response.data)
+		// 	setUserData(response.data);
+		// 	setLoading(false)
+		// 	setLabel('')
+		// } catch (error) {
+		// 	console.error('Error fetching data:', error);
+		// }
 	}
 
 	async function fetchSingleData(id) {
 		//setUserData(UserData2)
-		try {
-			setLoading(true)
-			const response = await axios.get(`${apiUrl}/data/${id}`);
-			console.log(response.data)
-			setUserData(response.data);
-			setLoading(false)
-		} catch (error) {
-			console.error('Error fetching data:', error);
-			setLoading(false)
-			setLabel('')
-		}
+		// try {
+		// 	setLoading(true)
+		// 	const response = await axios.get(`${apiUrl}/data/${id}`);
+		// 	console.log(response.data)
+		// 	setUserData(response.data);
+		// 	setLoading(false)
+		// } catch (error) {
+		// 	console.error('Error fetching data:', error);
+		// 	setLoading(false)
+		// 	setLabel('')
+		// }
+		setUserData(UserData2)
 	}
 
 	const handlePieChartClick = (data) => {
