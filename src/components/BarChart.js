@@ -18,18 +18,18 @@ const BarChart = ({ data }) => {
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: data.map(item => item.name),
+        labels: data.map(item => item.category),
         datasets: [
           {
             label: '# Value 01',
-            data: data.map(item => item.value01),
+            data: data.map(item => item.value1),
             backgroundColor: 'rgba(75, 192, 192, 0.2)',
             borderColor: 'rgba(75, 192, 192, 1)',
             borderWidth: 1,
           },
           {
             label: '# Value 02',
-            data: data.map(item => item.value02),
+            data: data.map(item => item.value2),
             backgroundColor: 'rgba(255, 99, 132, 0.2)',
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1,

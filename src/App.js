@@ -1,28 +1,68 @@
 import { useState, useEffect } from 'react';
 import './App.css';
+import axios from 'axios'
 import BarChart from './components/BarChart';
 import PieChart from './components/PieChart';
 import PieChart2 from './components/PieChart2';
-import { UserData, UserData2 } from './Data';
+import { UserData2, apiUrl } from './Data';
 
 function App() {
-	const [userData, setUserData] = useState(UserData)
+	const [loading, setLoading] = useState(true)
+	const [label, setLabel] = useState('')
+	const [userData, setUserData] = useState()
 
-	useEffect(()=>{},[])
+	useEffect(()=>{
+		
+	fetchData()
+	},[])
+
+	async function fetchData() {
+		try {
+			const response = await axios.get(`${apiUrl}/data/`);
+			//console.log(response.data)
+			setUserData(response.data);
+			setLoading(false)
+			setLabel('')
+		} catch (error) {
+			console.error('Error fetching data:', error);
+		}
+	}
+
+	async function fetchSingleData(id) {
+		//setUserData(UserData2)
+		try {
+			setLoading(true)
+			const response = await axios.get(`${apiUrl}/data/${id}`);
+			console.log(response.data)
+			setUserData(response.data);
+			setLoading(false)
+		} catch (error) {
+			console.error('Error fetching data:', error);
+			setLoading(false)
+			setLabel('')
+		}
+	}
+
 	const handlePieChartClick = (data) => {
-		console.log(data.label);
-		setUserData(UserData2)
+		//console.log(data);
+		setLabel(data.label)
+		fetchSingleData(data.catId);
+		// setUserData(UserData2)
 	
 	};
 
 	const RefreshData = ()=>{
 		//console.log('Refreshed')
-		setUserData(UserData)
+		fetchData()
 	}
  
 
 	return (
-		<div className="App">
+		<>
+			{
+				loading ? <h1>Please wait...</h1> : 
+				<div className="App">
+				{label !== '' ? <h1>{label}'s Category</h1>: <h1>All Categories</h1>}
 			<div style={{ width: 400}}>
 				<PieChart data={userData} onClick={handlePieChartClick} />
 			</div>
@@ -38,6 +78,8 @@ function App() {
 				<button onClick={RefreshData}>Refresh Chart</button>
 			</div>
 		</div>
+			}
+		</>
 	);
 }
 

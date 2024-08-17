@@ -5,9 +5,9 @@ import { Pie } from 'react-chartjs-2';
 const PieChart2 = ({ data }) => {
   //console.log(data)
   const chartData = {
-    labels: data.map(item => item.name),
+    labels: data.map(item => item.category),
     datasets: [{
-      data: data.map(item => item.value01 + item.value02),
+      data: data.map(item => item.value1),
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',

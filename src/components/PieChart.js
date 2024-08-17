@@ -5,6 +5,7 @@ import { Chart, ArcElement } from 'chart.js';
 Chart.register(ArcElement);
 
 const PieChart = ({ data, onClick }) => {
+	//const [id, setId]= useState()
 	const [chartData, setChartData] = useState({
 		labels: [],
 		datasets: [
@@ -17,7 +18,9 @@ const PieChart = ({ data, onClick }) => {
 	});
 
 	useEffect(() => {
-		const labels = data.map((item) => item.name);
+		//console.log(data)
+		const labels = data.map((item) => item.category);
+		const id = data.map((item)=> item.id)
 		const dataValues = data.map((item) => 1); // assuming each item has a value of 1
 		//const backgroundColors = data.map((item) => getRandomColor());
 		//const hoverBackgroundColors = data.map((item) => getRandomColor());
@@ -31,6 +34,8 @@ const PieChart = ({ data, onClick }) => {
 					//hoverBackgroundColor: hoverBackgroundColors,
 				},
 			],
+			id
+
 		});
 	}, [data]);
 
@@ -44,11 +49,15 @@ const PieChart = ({ data, onClick }) => {
 	// };
 
 	const handleChartClick = (event, elements) => {
+		
 		if (elements.length > 0) {
 			const index = elements[0].index;
+			//console.log(elements[0])
 			const label = chartData.labels[index];
+			const catId = chartData.id[index] 
+			//console.log(chartData.id[index])
 			//const value = chartData.datasets[0].data[index];
-			onClick({ index, label });
+			onClick({label, catId });
 		}
 	};
 
